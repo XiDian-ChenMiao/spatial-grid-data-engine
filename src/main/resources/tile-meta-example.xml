@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    name: 金字塔名称
+    version: 金字塔版本
+    updateTime: 金字塔更新时间
+    dataType: 数据类型
+    schemaType: 投影类型
+    tileSize: 瓦片大小
+    tileFormat: 瓦片格式
+    minLevel: 最小级别
+    maxLevel: 最大级别
+    east: 东经
+    west: 西经
+    south: 南纬
+    north: 北纬
+    minResolution: 最小分辨率
+    maxResolution: 最大分辨率
+    keywords: 描述信息
+-->
+<Metadata name="testzs_0321" version="1.0.0" updateTime="20160321193353405" dataType="DATA_RASTER_IMAGE"
+          schemaType="SCHEMA_GEODETIC" tileSize="256" tileFormat="JPG" minLevel="0" maxLevel="5" east="180" west="-180"
+          south="-90" north="90" minResolution="0.703125" maxResolution="0.0166667" keywords="no keywords"/>
