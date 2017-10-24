@@ -4,13 +4,14 @@ import com.xidian.spatial.enumation.metadata.DataTypeEnum;
 import com.xidian.spatial.enumation.metadata.SchemaTypeEnum;
 import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
 import java.io.StringReader;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 文件描述：瓦片金字塔模型类
@@ -44,6 +45,31 @@ public class TilePyramidMetaData {
 
     public boolean deletes = false;/*是否已经删除*/
     public boolean quadtree = false;/*是否已经是四叉树方式*/
+
+    /**
+     * 属性中文描述表
+     */
+    public static final Map<String, String> ATTRIBUTE_DESCRIBE = new HashMap<String, String>();// 中文属性值
+    static {
+        ATTRIBUTE_DESCRIBE.put("name", "地区名称");
+        ATTRIBUTE_DESCRIBE.put("dataType", "数据类型");
+        ATTRIBUTE_DESCRIBE.put("schemaType", "投影类型");
+        ATTRIBUTE_DESCRIBE.put("tileFormat", "瓦片格式");
+        ATTRIBUTE_DESCRIBE.put("tileSize", "瓦片大小");
+        ATTRIBUTE_DESCRIBE.put("version", "版本");
+        ATTRIBUTE_DESCRIBE.put("updateTime", "更新时间");
+        ATTRIBUTE_DESCRIBE.put("minLevel", "最小级别");
+        ATTRIBUTE_DESCRIBE.put("maxLevel", "最大级别");
+        ATTRIBUTE_DESCRIBE.put("east", "东经");
+        ATTRIBUTE_DESCRIBE.put("west", "西经");
+        ATTRIBUTE_DESCRIBE.put("south", "南纬");
+        ATTRIBUTE_DESCRIBE.put("north", "北纬");
+        ATTRIBUTE_DESCRIBE.put("minResolution", "最小分辨率");
+        ATTRIBUTE_DESCRIBE.put("maxResolution", "最大分辨率");
+        ATTRIBUTE_DESCRIBE.put("keywords", "描述信息");
+        ATTRIBUTE_DESCRIBE.put("deletes", "是否删除");
+        ATTRIBUTE_DESCRIBE.put("quadtree", "四叉存储");
+    }
 
     @Override
     public String toString() {
@@ -126,5 +152,31 @@ public class TilePyramidMetaData {
         metadata.maxResolution = Double.valueOf(element
                 .getAttributeValue("maxResolution"));
         return metadata;
+    }
+
+    /**
+     * 导出元数据信息
+     * @return
+     */
+    public Element export() {
+        Element root = new Element("Metadata");
+        Class<? extends TilePyramidMetaData> cls = TilePyramidMetaData.class;
+        Field[] fields = cls.getDeclaredFields();
+        if (fields != null) {
+            for (int i = 0; i < fields.length; i++) {
+                String fieldName = fields[i].getName();
+                if ("ATTRIBUTE_DESCRIBE".equals(fieldName)
+                        || "deletes".equals(fieldName)
+                        || "quadtree".equals(fieldName))
+                    continue;
+                try {
+                    root.setAttribute(fieldName, fields[i].get(this).toString());
+                } catch (Exception e) {
+                    logger.error("export metadata error: " + e.getMessage());
+                    return null;
+                }
+            }
+        }
+        return root;
     }
 }
