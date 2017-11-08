@@ -1,4 +1,4 @@
-package com.xidian.spatial.enumation.metadata;
+package com.xidian.spatial.enumation;
 
 /**
  * 文件描述：元数据中的数据类型枚举

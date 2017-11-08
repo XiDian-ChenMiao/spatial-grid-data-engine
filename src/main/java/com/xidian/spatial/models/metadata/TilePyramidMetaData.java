@@ -1,7 +1,7 @@
 package com.xidian.spatial.models.metadata;
 
-import com.xidian.spatial.enumation.metadata.DataTypeEnum;
-import com.xidian.spatial.enumation.metadata.SchemaTypeEnum;
+import com.xidian.spatial.enumation.DataTypeEnum;
+import com.xidian.spatial.enumation.SchemaTypeEnum;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;

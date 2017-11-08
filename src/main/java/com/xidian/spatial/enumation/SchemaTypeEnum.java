@@ -1,4 +1,4 @@
-package com.xidian.spatial.enumation.metadata;
+package com.xidian.spatial.enumation;
 
 /**
  * 文件描述：金字塔元数据中投影类型枚举
@@ -11,7 +11,7 @@ public enum SchemaTypeEnum {
      */
     SCHEMA_UNKNOWN,
     /**
-     * 地理经纬度坐标投影
+     * 地理经纬度投影
      */
     SCHEMA_GEODETIC,
     /**
